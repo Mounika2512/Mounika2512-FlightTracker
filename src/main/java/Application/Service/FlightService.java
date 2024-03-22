@@ -38,10 +38,10 @@ public class FlightService {
     }
 
     /**
-     * TODO: Use the FlightDAO to add a new flight to the database.
+    
      *
-     * This method should also return the added flight. A distinction should be made between *transient* and
-     * *persisted* objects - the *transient* flight Object given as the parameter will not contain the flight's id,
+     * This method should also return the added flight. A distinction should be made between transient and
+     * persisted objects - the transient flight Object given as the parameter will not contain the flight's id,
      * because it is not yet a database record. When this method is used, it should return the full persisted flight,
      * which will contain the flight's id. This way, any part of the application that uses this method has
      * all information about the new flight, because knowing the new flight's ID is necessary. This means that the
@@ -53,11 +53,11 @@ public class FlightService {
      *         inform our provide the front-end client with information about the added Flight.
      */
     public Flight addFlight(Flight flight){
-        return null;
+        return flightDAO.insertFlight(flight);
     }
 
     /**
-     * TODO: Use the FlightDAO to update an existing flight from the database.
+    
      * You should first check that the flight ID already exists. To do this, you could use an if statement that checks
      * if flightDAO.getFlightById returns null for the flight's ID, as this would indicate that the flight id does not
      * exist.
@@ -70,21 +70,29 @@ public class FlightService {
      *         user should have some insight if they attempted to edit a nonexistent flight.)
      */
     public Flight updateFlight(int flight_id, Flight flight){
-        return null;
-    }
+        Flight existingFlight = flightDAO.getFlightById(flight_id);
+        if (existingFlight == null) {
+            
+            return null;
+        } 
+            return existingFlight; 
+        
+    
+
+}
 
     /**
-     * TODO: Use the FlightDAO to retrieve a List containing all flights.
+    
      * You could use the flightDAO.getAllFlights method.
      *
      * @return all flights in the database.
      */
     public List<Flight> getAllFlights() {
-        return null;
+        return flightDAO.getAllFlights();
     }
 
     /**
-     * TODO: Use the FlightDAO to retrieve a List containing all flights departing from a certain city and arriving at
+     
      * some other city. You could use the flightDAO.getAllFlightsFromCityToCity method.
      *
      * @param departure_city the departing city of the flight.
@@ -92,6 +100,6 @@ public class FlightService {
      * @return all flights departing from departure_city and arriving at arrival_city.
      */
     public List<Flight> getAllFlightsFromCityToCity(String departure_city, String arrival_city) {
-        return null;
+        return flightDAO.getAllFlightsFromCityToCity(departure_city, arrival_city);
     }
 }
